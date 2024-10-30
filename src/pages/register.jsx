@@ -4,15 +4,15 @@ import { request } from "../config/resquest";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 export const Register = () => {
   const { handleSubmit, reset, register } = useForm();
   const navigate = useNavigate();
+
   const submit = (data) => {
     request
       .post("/register", data)
       .then((res) => {
-        if (res.status == 200 || res.status > 200) {
+        if (res.status === 200 || res.status > 200) {
           navigate("/");
         }
       })
@@ -20,35 +20,39 @@ export const Register = () => {
         toast.error(error.response.data);
       });
   };
+
   return (
-    <div>
-      <div className="absolute rounded-sm w-[400px] p-[20px] bg-cyan-300 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-        <form onSubmit={handleSubmit(submit)} className="mt-[20px]">
-          <div className="mt-[20px]">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-purple-500 to-pink-400">
+      <div className="bg-white rounded-lg shadow-lg w-[400px] p-8 transform transition duration-300 hover:scale-105">
+        <h2 className="text-2xl font-semibold text-center text-gray-800">Register</h2>
+        <form onSubmit={handleSubmit(submit)} className="mt-6 space-y-4">
+          <div>
             <input
-              className="p-[10px] w-full"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500 transition duration-300"
               type="email"
               {...register("email")}
-              placeholder="email"
+              placeholder="Email"
             />
           </div>
-          <div className="mt-[20px]">
+          <div>
             <input
-              className="p-[10px] w-full"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500 transition duration-300"
               type="password"
               {...register("password")}
-              placeholder="password"
+              placeholder="Password"
             />
           </div>
-          <div className="mt-[20px] mb-[20px]">
+          <div>
             <input
-              className="p-[10px] w-full"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500 transition duration-300"
               type="text"
               {...register("name")}
-              placeholder="name"
+              placeholder="Name"
             />
           </div>
-          <button className="p-[10px] bg-green-500">Send</button>
+          <button className="w-full py-3 bg-purple-500 text-white font-semibold rounded-md shadow-lg hover:bg-purple-600 transition duration-300">
+            Send
+          </button>
         </form>
       </div>
     </div>
